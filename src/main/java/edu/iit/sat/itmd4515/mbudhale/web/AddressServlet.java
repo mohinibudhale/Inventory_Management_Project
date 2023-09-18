@@ -1,4 +1,3 @@
-
 package edu.iit.sat.itmd4515.mbudhale.web;
 
 import edu.iit.sat.itmd4515.mbudhale.model.Address;
@@ -20,16 +19,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
 
-@WebServlet(urlPatterns={"/address","/a","/addr"})
-public class AddressServlet extends HttpServlet
-{
+@WebServlet(urlPatterns = {"/address", "/a", "/addr"})
+public class AddressServlet extends HttpServlet {
+
     @Resource
     Validator validator;
-    
-    @Resource(name="java:app/jdbc/itmd4515DS")
+
+    @Resource(name = "java:app/jdbc/itmd4515DS")
     DataSource ds;
 
-    private static final Logger LOG = Logger.getLogger(AddressServlet.class.getName());   
+    private static final Logger LOG = Logger.getLogger(AddressServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,63 +38,26 @@ public class AddressServlet extends HttpServlet
         LOG.info("AddessServlet.doPost getting values from my form to my servlet");
         String addressParameter = req.getParameter("address");
         String address2Parameter = req.getParameter("address2");
-        String districtParameter = req.getParameter("district");        
+        String districtParameter = req.getParameter("district");
         String cityIdParameter = req.getParameter("cityId");
         String postalCodeParameter = req.getParameter("postalCode");
         String phoneParameter = req.getParameter("phone");
-        
-        LOG.log(Level.INFO, "address{0}", addressParameter);
-        LOG.log(Level.INFO, "address2{0}", address2Parameter);
-        LOG.info("district"+ districtParameter);
-        LOG.info("city_id"+ cityIdParameter);
-        LOG.info("postal_code"+ postalCodeParameter);
-        LOG.info("phone"+ phoneParameter);
-        
-        Integer cityId = null;
-        if(cityIdParameter!=null && !cityIdParameter.isBlank())
-        {
-            cityId= Integer.valueOf(cityIdParameter);
-        }
-        
-        String address = null;
-        if(addressParameter!=null && !addressParameter.isBlank())
-        {
-            address= String.valueOf(addressParameter);
-        }
-       
-        String address2 = null;
-        if(address2Parameter!=null && !address2Parameter.isBlank())
-        {
-            address2= String.valueOf(address2Parameter);
-        }
-        String postalCode = null;
-        if(postalCodeParameter!=null && !postalCodeParameter.isBlank())
-        {
-            postalCode= String.valueOf(postalCodeParameter);
-        }
-         
-        String district = null;
-        if(districtParameter!=null && !districtParameter.isBlank())
-        {
-            district= String.valueOf(districtParameter);
-        }
-         
-        String phone = null;
-        if(phoneParameter!=null && !phoneParameter.isBlank())
-        {
-            phone= String.valueOf(phoneParameter);
-        }
-        
+
+        Integer cityId = validateAndConvertToInteger(cityIdParameter);
+        String address = validateAndGetString(addressParameter);
+        String address2 = validateAndGetString(address2Parameter);
+        String postalCode = validateAndGetString(postalCodeParameter);
+        String district = validateAndGetString(districtParameter);
+        String phone = validateAndFormatPhoneNumber(phoneParameter);
         Address a = new Address(address,
-                                address2,
-                                district, 
-                                cityId, 
-                                postalCode,
-                                phone, "POINT(12.3456789 34.5678901)");  
+                address2,
+                district,
+                cityId,
+                postalCode,
+                phone, "POINT(12.3456789 34.5678901)");
         LOG.info(a.toString());
-        Set<ConstraintViolation<Address>> violations  =validator.validate(a);
-        if(!violations.isEmpty())
-        {
+        Set<ConstraintViolation<Address>> violations = validator.validate(a);
+        if (!violations.isEmpty()) {
             for (ConstraintViolation<Address> v : violations) {
                 LOG.info(v.toString());
             }
@@ -103,9 +65,7 @@ public class AddressServlet extends HttpServlet
             req.setAttribute("address", a);
             RequestDispatcher rd = req.getRequestDispatcher("address.jsp");
             rd.forward(req, resp);
-        }
-        else
-        {
+        } else {
             CreateAddress(a);
             req.setAttribute("address", a);
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/Confirmation.jsp");
@@ -115,12 +75,13 @@ public class AddressServlet extends HttpServlet
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOG.info("AddessServlet.doGet redirecting"); 
-        resp.sendRedirect(req.getContextPath()+"/address.jsp");        
+        LOG.info("AddessServlet.doGet redirecting");
+        resp.sendRedirect(req.getContextPath() + "/address.jsp");
     }
+
     private void CreateAddress(Address a) {
-       String insertAddress = "INSERT INTO address (address, address2, district, city_id, postal_code, phone,location) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))";
+        String insertAddress = "INSERT INTO address (address, address2, district, city_id, postal_code, phone,location) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))";
         try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(insertAddress)) {
             ps.setString(1, a.getAddress());
             ps.setString(2, a.getAddress2());
@@ -135,5 +96,46 @@ public class AddressServlet extends HttpServlet
             LOG.log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public static Integer validateAndConvertToInteger(String parameter) {
+        if (parameter != null && !parameter.isBlank()) {
+            try {
+                return Integer.valueOf(parameter);
+            } catch (NumberFormatException e) {
+                LOG.log(Level.SEVERE, parameter);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static String validateAndGetString(String parameter) {
+        if (parameter != null && !parameter.isBlank()) {
+            try {
+                return parameter.trim();
+            } catch (Exception e) {
+                LOG.log(Level.SEVERE, parameter);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public static String validateAndFormatPhoneNumber(String phoneNumber) {
+        if (phoneNumber != null && !phoneNumber.isBlank()) {
+            String formattedPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+            if (isValidPhoneNumber(formattedPhoneNumber)) {
+                return formattedPhoneNumber;
+            } 
+            else {
+                 return null;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isValidPhoneNumber(String phoneNumber) {       
+        return phoneNumber != null && phoneNumber.matches("\\d{10}");
+    }
+
 }

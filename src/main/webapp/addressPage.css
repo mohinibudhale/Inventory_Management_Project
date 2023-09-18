@@ -9,7 +9,7 @@ body
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 100vh;
     color: white;
     margin-right: 700px
 }
@@ -58,28 +58,9 @@ ul {
 li {
     margin-bottom: 5px;
 }
-#feedback label {
-    display: block;
-    margin-bottom: 10px; 
-}
 
-#feedback {
-    width: 100%;
-    height: 100px;
-    resize: vertical;
-    margin-top: -300px;
-    margin-left: 400px;
-}
 
-#submitFeedback {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 10px; 
-    margin-left: 500px
-}
+
 
 
 

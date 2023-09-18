@@ -48,13 +48,7 @@
             </div>
             <div>
                 <button type="submit"> Create Address</button>
-            </div>  
-            <div id="feedback">
-                <label id="feedback" for="feedback">Lab 3 Feedback: </label>
-                <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea>
-                <button id="submitFeedback" type="submit">Submit Feedback</button>
-            </div>
-        </form>   
-
+            </div>            
+        </form>
     </body>
 </html>
