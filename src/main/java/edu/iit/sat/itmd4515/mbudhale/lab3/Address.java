@@ -1,5 +1,5 @@
 
-package edu.iit.sat.itmd4515.mbudhale.model;
+package edu.iit.sat.itmd4515.mbudhale.lab3;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;

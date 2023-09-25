@@ -1,6 +1,6 @@
-package edu.iit.sat.itmd4515.mbudhale.web;
+package edu.iit.sat.itmd4515.mbudhale.lab3;
 
-import edu.iit.sat.itmd4515.mbudhale.model.Address;
+import edu.iit.sat.itmd4515.mbudhale.lab3.Address;
 import jakarta.annotation.Resource;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
