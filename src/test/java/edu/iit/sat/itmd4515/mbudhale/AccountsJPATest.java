@@ -43,6 +43,9 @@ public class AccountsJPATest {
         tx.commit();
         assertTrue(a.getId() > 0);
         assertEquals("Curry House", a.getCompany_Name());
+        tx.begin();
+        em.remove(a);
+        tx.commit();
     }
 
     @Test
@@ -77,16 +80,28 @@ public class AccountsJPATest {
 
     @Test
     public void deleteTest() {
-        Accounts a = em.
-                createQuery("select a "
-                        + "from Accounts a "
-                        + "where a.company_Name='Curry House'", Accounts.class)
-                .getSingleResult();
-        assertTrue(a.getId() > 0);
-        assertEquals("Curry House", a.getCompany_Name());
         tx.begin();
-        em.remove(a);
+        Accounts newA = new Accounts(AccountType.CUSTOMER, "Nepal House", "NepalHouse@gmail.com", "773-769-1132", "1200 N SouthB, Chicago Illinois 60616", LocalDate.now());
+        em.persist(newA);
+        Accounts ar = em.
+                createQuery("select newA "
+                        + "from Accounts newA "
+                        + "where newA.company_Name='Nepal House'", Accounts.class)
+                .getSingleResult();
+        tx.commit();        
+        tx.begin();
+        em.remove(ar);
         tx.commit();
+        Accounts TryReadbackfromDB = em.
+                createQuery("select newA "
+                        + "from Accounts newA "
+                        + "where newA.company_Name='Nepal House'", Accounts.class)
+                .getResultList()
+                .stream()
+                .findFirst()
+                .orElse(null);
+        assertNull(TryReadbackfromDB);
+
     }
 
     @AfterEach
