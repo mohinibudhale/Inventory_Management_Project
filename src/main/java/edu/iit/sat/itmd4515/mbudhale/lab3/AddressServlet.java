@@ -1,6 +1,4 @@
 package edu.iit.sat.itmd4515.mbudhale.lab3;
-
-import edu.iit.sat.itmd4515.mbudhale.lab3.Address;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -27,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
 
+//using JPA to connect
 @WebServlet(urlPatterns = {"/address", "/a", "/addr"})
 public class AddressServlet extends HttpServlet {
 
