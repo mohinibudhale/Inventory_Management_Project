@@ -43,12 +43,12 @@ public class AccountsJPATest {
 
     @Test
     public void createTest() {
-        Account a = new Account(AccountType.CUSTOMER, "Curry House", "CurryHouse@gmail.com", "773-769-1132", "1200 N Broadway, Chicago Illinois 60614", LocalDate.now());
+        Account a = new Account(AccountType.CUSTOMER, "xyz", "CurryHouse@gmail.com", "773-769-1132", "1200 N Broadway, Chicago Illinois 60614", LocalDate.now());
         tx.begin();
         em.persist(a);
         tx.commit();
         assertTrue(a.getId() > 0);
-        assertEquals("Curry House", a.getCompany_Name());
+        assertEquals("xyz", a.getCompany_Name());
         tx.begin();
         em.remove(a);
         tx.commit();
@@ -109,7 +109,7 @@ public class AccountsJPATest {
         assertNull(TryReadbackfromDB);
 
     }
-
+    // Testing UniDirectional Relationship
     @Test
     public void testUnidirectionalRelationship() {
         tx.begin();
@@ -135,7 +135,7 @@ public class AccountsJPATest {
         tx.commit();
 
     }
-
+    // Testing BiDirectional Relationship
     @Test
     public void biDirectionalRelationshipTest() {
         tx.begin();
