@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+//making address an enity as part of lab 5
 @Entity
 public class Address {
     @Id
