@@ -7,23 +7,26 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Accounts")
-public class Accounts {
-    
+@Table(name = "ACCOUNT")
+public class Account {    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_ID")
     private Long id;
     
+
     @Enumerated(EnumType.STRING)
     @Column(name = "ACCOUNT_TYPE", nullable=false, unique=true)
     private AccountType type; 
@@ -49,11 +52,14 @@ public class Accounts {
     @Column(name = "ACCOUNT_CREATED_DATE",nullable=false)
     @NotNull(message = "Created date is required")
     private LocalDate created_Date;
+    
+    @OneToMany(mappedBy = "acc")
+    private List<All_Order> orderslist = new ArrayList<>();
 
-    public Accounts() {
+    public Account() {
     }
 
-    public Accounts(AccountType type, String companyName, String email, String phone, String address, LocalDate createdDate) {
+    public Account(AccountType type, String companyName, String email, String phone, String address, LocalDate createdDate) {
         this.type = type;
         this.company_Name = companyName;
         this.email = email;
@@ -141,7 +147,7 @@ public class Accounts {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Accounts other = (Accounts) obj;
+        final Account other = (Account) obj;
         
         if(this.id== null || other.id==null)
         {
@@ -150,6 +156,16 @@ public class Accounts {
         return Objects.equals(this.id, other.id);
     }
 
+    public List<All_Order> getOrders() {
+        return orderslist;
+    }
+
+    public void setOrders(List<All_Order> orders) {
+        this.orderslist = orders;
+    }
+
+   
+   
 
     
 }

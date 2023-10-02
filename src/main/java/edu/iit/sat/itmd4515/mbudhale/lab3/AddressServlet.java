@@ -2,12 +2,20 @@ package edu.iit.sat.itmd4515.mbudhale.lab3;
 
 import edu.iit.sat.itmd4515.mbudhale.lab3.Address;
 import jakarta.annotation.Resource;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.HeuristicMixedException;
+import jakarta.transaction.HeuristicRollbackException;
+import jakarta.transaction.NotSupportedException;
+import jakarta.transaction.RollbackException;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.UserTransaction;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import java.io.IOException;
@@ -27,6 +35,10 @@ public class AddressServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/itmd4515DS")
     DataSource ds;
+    @PersistenceContext(name = "itmd4515PU")
+    EntityManager em;
+    @Resource
+    UserTransaction tx;
 
     private static final Logger LOG = Logger.getLogger(AddressServlet.class.getName());
 
@@ -66,7 +78,7 @@ public class AddressServlet extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("address.jsp");
             rd.forward(req, resp);
         } else {
-            CreateAddress(a);
+            CreateAddressJPA(a);
             req.setAttribute("address", a);
             RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/views/Confirmation.jsp");
             rd.forward(req, resp);
@@ -79,7 +91,20 @@ public class AddressServlet extends HttpServlet {
         resp.sendRedirect(req.getContextPath() + "/address.jsp");
     }
 
-    private void CreateAddress(Address a) {
+    private void CreateAddressJPA(Address a) {
+        try {
+            tx.begin();
+            em.persist(a);
+            tx.commit();
+            
+        } catch (NotSupportedException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        } catch (SystemException | RollbackException | HeuristicMixedException | HeuristicRollbackException | SecurityException | IllegalStateException ex) {
+            Logger.getLogger(AddressServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void CreateAddressJDBC(Address a) {
         String insertAddress = "INSERT INTO address (address, address2, district, city_id, postal_code, phone,location) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ST_GeomFromText(?))";
         try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(insertAddress)) {
@@ -126,15 +151,14 @@ public class AddressServlet extends HttpServlet {
             String formattedPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
             if (isValidPhoneNumber(formattedPhoneNumber)) {
                 return formattedPhoneNumber;
-            } 
-            else {
-                 return null;
+            } else {
+                return null;
             }
         }
         return null;
     }
 
-    public static boolean isValidPhoneNumber(String phoneNumber) {       
+    public static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber != null && phoneNumber.matches("\\d{10}");
     }
 

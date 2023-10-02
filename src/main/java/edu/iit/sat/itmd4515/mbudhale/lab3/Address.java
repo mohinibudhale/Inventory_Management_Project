@@ -1,11 +1,20 @@
 
 package edu.iit.sat.itmd4515.mbudhale.lab3;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+@Entity
 public class Address {
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Address_ID")
+    private Integer id;
     @NotNull
     private String address;    
     @NotNull

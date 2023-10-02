@@ -1,7 +1,7 @@
 package edu.iit.sat.itmd4515.mbudhale;
 
 import edu.iit.sat.itmd4515.mbudhale.domain.AccountType;
-import edu.iit.sat.itmd4515.mbudhale.domain.Accounts;
+import edu.iit.sat.itmd4515.mbudhale.domain.Account;
 import jakarta.validation.ConstraintViolation;
 import java.util.List;
 import java.util.Set;
@@ -14,11 +14,11 @@ public class AccountsValidationTest extends BaseValidationTest {
 
     @Test
     public void IsValidEntity() {
-        List<Accounts> resultList = em.createQuery("select a from Accounts a where a.company_Name='Maxwell Street Market'", Accounts.class)
+        List<Account> resultList = em.createQuery("select a from Account a where a.company_Name='Maxwell Street Market'", Account.class)
                 .getResultList();
         assertTrue(!resultList.isEmpty());
-        for (Accounts a : resultList) {
-            Set<ConstraintViolation<Accounts>> violations = validator.validate(a);
+        for (Account a : resultList) {
+            Set<ConstraintViolation<Account>> violations = validator.validate(a);
             assertTrue(violations.isEmpty());
         }
     }
@@ -26,8 +26,8 @@ public class AccountsValidationTest extends BaseValidationTest {
     @Test
     public void testInvalidEntity() {
         //Purposly Passing wrong input to check if validation constraint works 
-        Accounts a = new Accounts(AccountType.VENDOR, " ", "bademailGmail", "11112222", null, null);
-        Set<ConstraintViolation<Accounts>> violations = validator.validate(a);
+        Account a = new Account(AccountType.VENDOR, " ", "bademailGmail", "11112222", null, null);
+        Set<ConstraintViolation<Account>> violations = validator.validate(a);
         assertFalse(violations.isEmpty());
         assertEquals(5, violations.size());
     }
