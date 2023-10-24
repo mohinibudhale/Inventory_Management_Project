@@ -6,12 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "INVENTORY")
+@NamedQuery(name="Inventory.findAll",query="select i from Inventory i")
+@Table(name = "Inventory")
 public class Inventory {
 
     @Id
@@ -95,8 +97,8 @@ public class Inventory {
 
     @Override
     public String toString() {
-        return "Inventory{" + "id=" + id + ", quantity=" + quantity + ", value=" + value + ", product=" + product + '}';
-    }
+        return "Inventory{" + "id=" + id + ", quantity=" + quantity + ", value=" + value + '}';
+    }  
 
    
 }

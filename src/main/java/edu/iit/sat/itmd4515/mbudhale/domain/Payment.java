@@ -6,13 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "PAYMENT")
+@Entity 
+@NamedQuery(name="Payment.findAll",query="select p from Payment p")
+@Table(name = "Payment")
 public class Payment {
 
     @Id
@@ -29,12 +31,12 @@ public class Payment {
     
     @OneToOne
     @JoinColumn(name = "ORDER_ID")
-    private All_Order order;
+    private AllOrder order;
 
     public Payment() {
     }
 
-    public Payment(Long paymentAmount, LocalDate paymentDate, String paymentMethod, All_Order order) {
+    public Payment(Long paymentAmount, LocalDate paymentDate, String paymentMethod, AllOrder order) {
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
         this.paymentMethod = paymentMethod;
@@ -103,11 +105,11 @@ public class Payment {
     }
 
 
-    public All_Order getOrder() {
+    public AllOrder getOrder() {
         return order;
     }
 
-    public void setOrder(All_Order order) {
+    public void setOrder(AllOrder order) {
         this.order = order;
     }
 

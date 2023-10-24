@@ -2,7 +2,7 @@ package edu.iit.sat.itmd4515.mbudhale;
 
 import edu.iit.sat.itmd4515.mbudhale.domain.AccountType;
 import edu.iit.sat.itmd4515.mbudhale.domain.Account;
-import edu.iit.sat.itmd4515.mbudhale.domain.All_Order;
+import edu.iit.sat.itmd4515.mbudhale.domain.AllOrder;
 import edu.iit.sat.itmd4515.mbudhale.domain.Inventory;
 import edu.iit.sat.itmd4515.mbudhale.domain.Product;
 import edu.iit.sat.itmd4515.mbudhale.domain.ProductBrand;
@@ -147,7 +147,7 @@ public class AccountsJPATest {
         em.persist(product);
         Account account = new Account(AccountType.CUSTOMER, "Customer Name", "customer@email.com", "123-456-7890", "Customer Address", LocalDate.now());
         em.persist(account);
-        All_Order order = new All_Order("Order Type", 100L, 50L, LocalDate.now(), account);
+        AllOrder order = new AllOrder("Order Type", 100L, 50L, LocalDate.now(), account);
         em.persist(order);
         tx.commit();
 

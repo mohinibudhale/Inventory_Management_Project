@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.HashSet;
@@ -14,7 +15,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "PRODUCT")
+@NamedQuery(name="product.findAll",query="select p from Product p")
+@Table(name = "Product")
 public class Product {
 
     @Id
@@ -39,7 +41,7 @@ public class Product {
     private ProductCategory productCategory;
 
     @ManyToMany(mappedBy = "orderItems")
-    private Set<All_Order> orders = new HashSet<>();
+    private Set<AllOrder> orders = new HashSet<>();
 
     @OneToOne(mappedBy = "product")
     private Inventory inventory;
@@ -137,11 +139,11 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Set<All_Order> getOrders() {
+    public Set<AllOrder> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<All_Order> orders) {
+    public void setOrders(Set<AllOrder> orders) {
         this.orders = orders;
     }
 

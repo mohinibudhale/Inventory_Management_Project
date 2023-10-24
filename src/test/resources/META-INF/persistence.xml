@@ -4,7 +4,7 @@
     <persistence-unit name="itmd4515testPU" transaction-type="RESOURCE_LOCAL">
         <class>edu.iit.sat.itmd4515.mbudhale.domain.Account</class>
         <class>edu.iit.sat.itmd4515.mbudhale.domain.Inventory</class>
-        <class>edu.iit.sat.itmd4515.mbudhale.domain.All_Order</class>
+        <class>edu.iit.sat.itmd4515.mbudhale.domain.AllOrder</class>
         <class>edu.iit.sat.itmd4515.mbudhale.domain.Payment</class>
         <class>edu.iit.sat.itmd4515.mbudhale.domain.ProductBrand</class>
         <class>edu.iit.sat.itmd4515.mbudhale.domain.ProductCategory</class>

@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -19,7 +20,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT")
+@NamedQuery(name="Account.findAll",query="select a from Account a")
+@Table(name = "Account")
 public class Account {    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,7 +56,7 @@ public class Account {
     private LocalDate created_Date;
     
     @OneToMany(mappedBy = "acc")
-    private List<All_Order> orderslist = new ArrayList<>();
+    private List<AllOrder> orderslist = new ArrayList<>();
 
     public Account() {
     }
@@ -156,11 +158,11 @@ public class Account {
         return Objects.equals(this.id, other.id);
     }
 
-    public List<All_Order> getOrders() {
+    public List<AllOrder> getOrders() {
         return orderslist;
     }
 
-    public void setOrders(List<All_Order> orders) {
+    public void setOrders(List<AllOrder> orders) {
         this.orderslist = orders;
     }
 

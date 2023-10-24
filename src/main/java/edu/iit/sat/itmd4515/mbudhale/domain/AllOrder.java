@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -16,8 +17,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "All_Order")
-public class All_Order {
+@NamedQuery(name="AllOrder.findAll",query="select o from AllOrder o")
+@Table(name = "AllOrder")
+public class AllOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ORDER_ID")
@@ -41,10 +43,10 @@ public class All_Order {
     @JoinColumn(name = "ACCOUNT_ID")
     private Account acc;      
 
-    public All_Order() {
+    public AllOrder() {
     }
 
-    public All_Order(String orderType, Long orderPrice, Long orderBalance, LocalDate orderDate, Account acc) {
+    public AllOrder(String orderType, Long orderPrice, Long orderBalance, LocalDate orderDate, Account acc) {
         this.orderType = orderType;
         this.orderPrice = orderPrice;
         this.orderBalance = orderBalance;
@@ -78,7 +80,7 @@ public class All_Order {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final All_Order other = (All_Order) obj;
+        final AllOrder other = (AllOrder) obj;
         if (this.id == null || other.id == null) {
             return false;
         }
@@ -144,9 +146,26 @@ public class All_Order {
         product.getOrders().remove(this);
     }
 
-    @Override
-    public String toString() {
-        return "All_Order{" + "id=" + id + ", orderType=" + orderType + ", orderPrice=" + orderPrice + ", orderBalance=" + orderBalance + ", orderDate=" + orderDate + '}';
+    public void createOrder(Account a){
+        this.acc=a;  
+        if(!a.getOrders().contains(this))
+        {
+            a.getOrders().add(this);
+        }        
+    }
+    public void removeOrder(Account a)
+    {
+        this.acc=a;
+        if(a.getOrders().contains(this))
+        {
+           a.getOrders().remove(this);
+        }
+        this.acc=null;
     }
 
+    @Override
+    public String toString() {
+        return "AllOrder{" + "id=" + id + ", orderType=" + orderType + ", orderPrice=" + orderPrice + ", orderBalance=" + orderBalance + ", orderDate=" + orderDate + '}';
+    }
+ 
 }

@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRODUCT_BRAND")
+@NamedQuery(name="ProductBrand.findAll",query="select pb from ProductBrand pb")
+@Table(name = "ProductBrand")
 public class ProductBrand {
 
     @Id

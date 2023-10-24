@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRODUCT_CATEGORY")
+@NamedQuery(name="ProductCategory.findAll",query="select pc from ProductCategory pc")
+@Table(name = "ProductCategory")
 public class ProductCategory {
 
     @Id
