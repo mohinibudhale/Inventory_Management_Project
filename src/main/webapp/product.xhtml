@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Create new product form</title>
+    </h:head>
+    <h:body>
+        Add a Product to the system
+        <h:form>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productName" value="product Name: "/>
+                    <h:inputText id="productName" value="#{productController.product.productName}"/>
+                </h:panelGroup>  
+            </p>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productUnit" value="product Unit: "/>
+                    <h:inputText id="productUnit" value="#{productController.product.productUnit}"/>
+                </h:panelGroup> 
+            </p>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productCost" value="product Cost: "/>
+                    <h:inputText id="productCost" value="#{productController.product.cost}"/>
+                </h:panelGroup> 
+            </p>
+
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productPrice" value="product Price: "/>
+                    <h:inputText id="productPrice" value="#{productController.product.price}"/>
+                </h:panelGroup> 
+            </p>            
+
+
+            <p><h:commandButton action="#{productController.demoAction()}" value="Add Product"/></p>
+        </h:form>
+    </h:body>
+</html>
