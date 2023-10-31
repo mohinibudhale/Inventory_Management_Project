@@ -30,7 +30,7 @@ public class Account {
     
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ACCOUNT_TYPE", nullable=false, unique=true)
+    @Column(name = "ACCOUNT_TYPE", nullable=false)
     private AccountType type; 
     
     @Column(name = "ACCOUNT_COMPANY_NAME",nullable=false,unique=true)
@@ -44,7 +44,7 @@ public class Account {
     
     @Column(name = "ACCOUNT_PHONE",nullable=false)
     @NotBlank(message = "Phone number is required")
-    @Size(min = 10, max = 15, message = "Phone number must be between 10 and 15 characters")
+    //@Size(min = 10, max = 15)
     private String phone;
     
     @Column(name = "ACCOUNT_ADDRESS",nullable=false) 

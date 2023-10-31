@@ -29,7 +29,7 @@ public class AccountsValidationTest extends BaseValidationTest {
         Account a = new Account(AccountType.VENDOR, " ", "bademailGmail", "11112222", null, null);
         Set<ConstraintViolation<Account>> violations = validator.validate(a);
         assertFalse(violations.isEmpty());
-        assertEquals(5, violations.size());
+        assertEquals(4, violations.size());
     }
 
 }
