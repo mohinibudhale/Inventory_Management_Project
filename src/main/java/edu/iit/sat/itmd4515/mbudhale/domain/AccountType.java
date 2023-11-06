@@ -3,7 +3,8 @@ package edu.iit.sat.itmd4515.mbudhale.domain;
 
 public enum AccountType {
     CUSTOMER("customer"),
-    VENDOR("vendor");
+    VENDOR("vendor"),
+    EMPLOYEE("employee");
     
     private String label;
     private AccountType(String label)

@@ -1,53 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-    <title>Confirmation Page</title>
-    <style type="text/css">
-        .confirmation {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/DemoTemplate.xhtml">
 
-        .label {
-            font-weight: bold;
-        }
+    <ui:define name="title">
+        Confirmation Page
+    </ui:define>
 
-        .value {
-            margin-left: 10px;
-        }
-    </style>
-</h:head>
-
-<h:body>
-    <div class="confirmation">
-        <h1>Your #{accountController.account.type} Account has been Successfully Created</h1>
+    <ui:define name="content">
+        Your #{accountController.account.type} Account has been Successfully Created
         <ul>
-            <li>
-                <span class="label">Account Type:</span>
-                <span class="value">#{accountController.account.type}</span>
-            </li>
-            <li>
-                <span class="label">Company Name:</span>
-                <span class="value">#{accountController.account.company_Name}</span>
-            </li>
-            <li>
-                <span class="label">Email:</span>
-                <span class="value">#{accountController.account.email}</span>
-            </li>
-            <li>
-                <span class="label">Phone:</span>
-                <span class="value">#{accountController.account.phone}</span>
-            </li>
-            <li>
-                <span class="label">Created Date:</span>
-                <span class="value">#{accountController.account.created_Date}</span>
-            </li>
+            <li>Account Type: #{accountController.account.type}</li>
+            <li>Company Name: #{accountController.account.company_Name}</li>
+            <li>Email: #{accountController.account.email}</li>
+            <li>Phone: #{accountController.account.phone}</li>
+            <li>Created Date: #{accountController.account.created_Date}</li>
         </ul>
-    </div>
-</h:body>
-</html>
+    </ui:define>
+
+</ui:composition>

@@ -1,69 +1,60 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-        <title>Account Page</title>
-    </h:head>
-   <h:body>
-    <div class="container">
-        <h1>Create an Account</h1>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/DemoTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        Add a account
+    </ui:define>
+
+    <ui:define name="content">
         <h:form>
-            <div class="form-group">
+            <h:panelGroup layout="block">
                 <h:outputLabel for="accountType" value="Account Type:" />
                 <h:selectOneMenu id="accountType" value="#{accountController.account.type}">
                     <f:selectItems value="#{accountController.allAccountType}" var="accountType" 
                                    itemLabel="#{accountType.label}" itemValue="#{accountType}" />
                 </h:selectOneMenu>
                 <h:message for="accountType" styleClass="error-message" />
-            </div>
+            </h:panelGroup>
 
-            <div class="form-group">
-                <h:outputLabel for="companyName" value="Company Name:" />
-                <h:inputText id="companyName" value="#{accountController.account.company_Name}" />
-                <h:message for="companyName" styleClass="error-message" />
-            </div>
+            <h:panelGroup layout="block">
+                <h:outputLabel for="Name" value="Name:" />
+                <h:inputText id="Name" value="#{accountController.account.company_Name}" />
+                <h:message for="Name" styleClass="error-message" />
+            </h:panelGroup>
 
-            <div class="form-group">
-                <h:outputLabel for="email" value="Company Email:" />
+            <h:panelGroup layout="block">
+                <h:outputLabel for="email" value="Email:" />
                 <h:inputText id="email" value="#{accountController.account.email}" />
                 <h:message for="email" styleClass="error-message" />
-            </div>
+            </h:panelGroup>
 
-            <div class="form-group">
-                <h:outputLabel for="phone" value="Company Phone:" />
+            <h:panelGroup layout="block">
+                <h:outputLabel for="phone" value="Phone:" />
                 <h:inputText id="phone" value="#{accountController.account.phone}" />
                 <h:message for="phone" styleClass="error-message" />
-            </div>
+            </h:panelGroup>
 
-            <div class="form-group">
-                <h:outputLabel for="address" value="Company Address:" />
+            <h:panelGroup layout="block">
+                <h:outputLabel for="address" value="Address:" />
                 <h:inputText id="address" value="#{accountController.account.address}" />
                 <h:message for="address" styleClass="error-message" />
-            </div>
+            </h:panelGroup>
 
-            <div class="form-group">
-                <h:outputLabel for="createdDate" value="Created Date:" />
-                <h:inputText id="createdDate" value="#{accountController.account.created_Date}" 
-                             p:type="date" p:placeholder="yyyy-MM-dd" styleClass="datepicker" >
+            <h:panelGroup layout="block">
+                <h:outputLabel for="createdDate" value="Added Date:" />
+                <h:inputText  p:type="date" id="createdDate" value="#{accountController.account.created_Date}">                            
                     <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
                 </h:inputText>
-                <h:message for="createdDate" styleClass="error-message" />
-            </div>
+                <h:message for="createdDate"/>
+            </h:panelGroup>  
 
-            <h:commandButton action="#{accountController.saveAccount()}" value="Create Account" />
-        </h:form>
-    </div>
-
-    <script>
-        $(document).ready(function () {
-            $(".datepicker").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-        });
-    </script>
-</h:body>
-</html>
+            <h:commandButton action="#{accountController.saveAccount()}" value="Add Account" />            
+        </h:form>       
+    </ui:define>
+</ui:composition>

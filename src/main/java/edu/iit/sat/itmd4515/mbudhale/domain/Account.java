@@ -1,5 +1,6 @@
 package edu.iit.sat.itmd4515.mbudhale.domain;
 
+import edu.iit.sat.itmd4515.mbudhale.security.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -7,56 +8,66 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name="Account.findAll",query="select a from Account a")
+@NamedQuery(name = "Account.findAll", query = "select a from Account a")
 @Table(name = "Account")
-public class Account {    
+public class Account {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_ID")
     private Long id;
-    
+
+    @OneToOne
+    @JoinColumn(name = "USERNAME", unique = true)
+    private User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "ACCOUNT_TYPE", nullable=false)
-    private AccountType type; 
-    
-    @Column(name = "ACCOUNT_COMPANY_NAME",nullable=false,unique=true)
+    @Column(name = "ACCOUNT_TYPE", nullable = false)
+    private AccountType type;
+
+    @Column(name = "NAME", nullable = false, unique = true)
     @NotBlank(message = "Company name is required")
     private String company_Name;
-    
-    @Column(name = "ACCOUNT_EMAIL",nullable=false)
+
+    @Column(name = "EMAIL", nullable = false)
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
     private String email;
-    
-    @Column(name = "ACCOUNT_PHONE",nullable=false)
+
+    @Column(name = "CONTACT", nullable = false)
     @NotBlank(message = "Phone number is required")
     //@Size(min = 10, max = 15)
     private String phone;
-    
-    @Column(name = "ACCOUNT_ADDRESS",nullable=false) 
+
+    @Column(name = "ADDRESS", nullable = false)
     @NotBlank(message = "Address is required")
     private String address;
-    
-    @Column(name = "ACCOUNT_CREATED_DATE",nullable=false)
+
+    @Column(name = "ADDED_DATE", nullable = false)
     @NotNull(message = "Created date is required")
     private LocalDate created_Date;
-    
+
     @OneToMany(mappedBy = "acc")
     private List<AllOrder> orderslist = new ArrayList<>();
+
+    //Checking if Account Type is customer or Employee
+    public boolean isValidAccount() {
+        return AccountType.CUSTOMER.equals(type) || AccountType.EMPLOYEE.equals(type);
+    }
 
     public Account() {
     }
@@ -150,9 +161,8 @@ public class Account {
             return false;
         }
         final Account other = (Account) obj;
-        
-        if(this.id== null || other.id==null)
-        {
+
+        if (this.id == null || other.id == null) {
             return false;
         }
         return Objects.equals(this.id, other.id);
@@ -166,8 +176,12 @@ public class Account {
         this.orderslist = orders;
     }
 
-   
-   
+    public User getUser() {
+        return user;
+    }
 
-    
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
