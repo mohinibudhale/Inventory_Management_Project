@@ -13,48 +13,56 @@
 
     <ui:define name="content">
         <h:form>
-            <h:panelGroup layout="block">
-                <h:outputLabel for="accountType" value="Account Type:" />
-                <h:selectOneMenu id="accountType" value="#{accountController.account.type}">
-                    <f:selectItems value="#{accountController.allAccountType}" var="accountType" 
-                                   itemLabel="#{accountType.label}" itemValue="#{accountType}" />
-                </h:selectOneMenu>
-                <h:message for="accountType" styleClass="error-message" />
-            </h:panelGroup>
-
-            <h:panelGroup layout="block">
-                <h:outputLabel for="Name" value="Name:" />
-                <h:inputText id="Name" value="#{accountController.account.company_Name}" />
-                <h:message for="Name" styleClass="error-message" />
-            </h:panelGroup>
-
-            <h:panelGroup layout="block">
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{accountController.account.email}" />
-                <h:message for="email" styleClass="error-message" />
-            </h:panelGroup>
-
-            <h:panelGroup layout="block">
-                <h:outputLabel for="phone" value="Phone:" />
-                <h:inputText id="phone" value="#{accountController.account.phone}" />
-                <h:message for="phone" styleClass="error-message" />
-            </h:panelGroup>
-
-            <h:panelGroup layout="block">
-                <h:outputLabel for="address" value="Address:" />
-                <h:inputText id="address" value="#{accountController.account.address}" />
-                <h:message for="address" styleClass="error-message" />
-            </h:panelGroup>
-
-            <h:panelGroup layout="block">
-                <h:outputLabel for="createdDate" value="Added Date:" />
-                <h:inputText  p:type="date" id="createdDate" value="#{accountController.account.created_Date}">                            
-                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
-                </h:inputText>
-                <h:message for="createdDate"/>
-            </h:panelGroup>  
-
-            <h:commandButton action="#{accountController.saveAccount()}" value="Add Account" />            
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="accountType" value="Account Type:" />
+                    <h:selectOneMenu id="accountType" value="#{accountController.account.type}">
+                        <f:selectItems value="#{accountController.allAccountType}" var="accountType" 
+                                       itemLabel="#{accountType.label}" itemValue="#{accountType}" />
+                    </h:selectOneMenu>
+                    <h:message for="accountType" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="Name" value="Name:" />
+                    <h:inputText id="Name" value="#{accountController.account.company_Name}" />
+                    <h:message for="Name" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="email" value="Email:" />
+                    <h:inputText id="email" value="#{accountController.account.email}" />
+                    <h:message for="email" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="phone" value="Phone:" />
+                    <h:inputText id="phone" value="#{accountController.account.phone}" />
+                    <h:message for="phone" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="address" value="Address:" />
+                    <h:inputText id="address" value="#{accountController.account.address}" />
+                    <h:message for="address" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="createdDate" value="Added Date:" />
+                    <h:inputText  p:type="date" id="createdDate" value="#{accountController.account.created_Date}">                            
+                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                    </h:inputText>
+                    <h:message for="createdDate"/>
+                </h:panelGroup>  
+            </p>
+            <p>
+                <h:commandButton action="#{accountController.saveAccount()}" value="Add Account" />            
+            </p>
         </h:form>       
     </ui:define>
 </ui:composition>
