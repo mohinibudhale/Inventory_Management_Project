@@ -1,5 +1,6 @@
 package edu.iit.sat.itmd4515.mbudhale.web;
 
+import edu.iit.sat.itmd4515.mbudhale.config.Itmd4515SecurityRoles;
 import edu.iit.sat.itmd4515.mbudhale.security.User;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -70,18 +71,29 @@ public class LoginController {
 
         return "/welcome.xhtml?faces-redirect=true";
     }
-    
-    public String getCurrentUser()
-    {
+
+    public String getCurrentUser() {
         return facesContext.getExternalContext().getRemoteUser();
     }
+
+    public boolean isAdmin() {
+        return securityContext.isCallerInRole(Itmd4515SecurityRoles.ADMIN_ROLE);
+    }
+
+    public boolean isCustomer() {
+        return securityContext.isCallerInRole(Itmd4515SecurityRoles.CUSTOMER_ROLE);
+    }
+
+    public boolean isEmployee() {
+        return securityContext.isCallerInRole(Itmd4515SecurityRoles.EMPLOYEE_ROLE);
+    }
+
     public String doLogout() {
-         LOG.info("LoginController.doLogout with " + this.getCurrentUser());
+        LOG.info("LoginController.doLogout with " + this.getCurrentUser());
         try {
             HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
             request.logout();
-        } 
-        catch (ServletException ex) {
+        } catch (ServletException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
 

@@ -23,6 +23,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQuery(name = "Account.findAll", query = "select a from Account a")
+@NamedQuery(name = "Account.findByUsername", query = "select a from Account a where a.user.userName = :uname")
 @Table(name = "Account")
 public class Account {
 
@@ -182,6 +183,14 @@ public class Account {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<AllOrder> getOrderslist() {
+        return orderslist;
+    }
+
+    public void setOrderslist(List<AllOrder> orderslist) {
+        this.orderslist = orderslist;
     }
 
 }

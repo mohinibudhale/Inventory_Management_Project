@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 @RequestScoped
 public class AccountController {
     @EJB AccountService accountSvc;
-
     private static final Logger LOG = Logger.getLogger(AccountController.class.getName());
     private Account account;
 

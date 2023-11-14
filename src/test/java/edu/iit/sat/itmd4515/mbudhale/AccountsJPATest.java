@@ -172,6 +172,7 @@ public class AccountsJPATest {
         em.remove(product);
         em.remove(product.getProductBrand());
         em.remove(product.getProductCategory());
+        em.remove(account);
         tx.commit();
 
     }
