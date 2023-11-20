@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/DemoTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        Add a Product
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productName" value="Product Name:" />
+                    <h:inputText id="productName" value="#{productController.product.productName}" />
+                    <h:message for="productName" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="productUnit" value="Product Unit:" />
+                    <h:inputText id="productUnit" value="#{productController.product.productUnit}" />
+                    <h:message for="productUnit" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="cost" value="Product Cost:" />
+                    <h:inputText id="cost" value="#{productController.product.cost}" />
+                    <h:message for="cost" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="price" value="Product Price:" />
+                    <h:inputText id="price" value="#{productController.product.price}" />
+                    <h:message for="price" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="brand" value="Product Brand:" />
+                    <h:inputText id="brand" value="#{productController.product.productBrand}" />
+                    <h:message for="brand" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+            <p>
+                <h:panelGroup layout="block">
+                    <h:outputLabel for="category" value="Product Category:" />
+                    <h:inputText id="category" value="#{productController.product.productCategory}" />
+                    <h:message for="category" styleClass="error-message" />
+                </h:panelGroup>
+            </p>
+
+            <p>
+                <h:commandButton action="#{productController.saveProduct()}" value="Add Product" />            
+            </p>
+        </h:form>       
+    </ui:define>
+
+</ui:composition>

@@ -5,11 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,21 +25,29 @@ public class Product {
     @Column(name = "PRODUCT_ID")
     private Long id;
     @Column(name = "PRODUCT_NAME")
+    @NotBlank(message = "Product name is required")
     private String productName;
+    
     @Column(name = "PRODUCT_UNIT")
+    @NotBlank(message = "Product Unit is required")
     private String productUnit;
+    
     @Column(name = "PRODUCT_COST")
+    @NotNull(message = "Product Cost is required")
     private Long cost;
+    
     @Column(name = "PRODUCT_PRICE")
+    @NotNull(message = "Product Price is required")
     private Long price;
 
-    @OneToOne
-    @JoinColumn(name = "BRAND_ID")
-    private ProductBrand productBrand;
+    @Column(name = "PRODUCT_BRAND")
+    @NotBlank(message = "Product Brand is required")
+    private String productBrand;
 
-    @OneToOne
-    @JoinColumn(name = "CATEGORY_ID")
-    private ProductCategory productCategory;
+    
+    @Column(name = "PRODUCT_CATEGORY")
+    @NotBlank(message = "Product Category is required")
+    private String productCategory;
 
     @ManyToMany(mappedBy = "orderItems")
     private Set<AllOrder> orders = new HashSet<>();
@@ -49,7 +58,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, String productUnit, Long cost, Long price, ProductBrand productBrand, ProductCategory productCategory) {
+    public Product(String productName, String productUnit, Long cost, Long price, String productBrand, String productCategory) {
         this.productName = productName;
         this.productUnit = productUnit;
         this.cost = cost;
@@ -57,6 +66,7 @@ public class Product {
         this.productBrand = productBrand;
         this.productCategory = productCategory;
     }
+
 
     public Long getId() {
         return id;
@@ -123,19 +133,19 @@ public class Product {
         this.price = price;
     }
 
-    public ProductBrand getProductBrand() {
+    public String getProductBrand() {
         return productBrand;
     }
 
-    public void setProductBrand(ProductBrand productBrand) {
+    public void setProductBrand(String productBrand) {
         this.productBrand = productBrand;
     }
 
-    public ProductCategory getProductCategory() {
+    public String getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
     }
 

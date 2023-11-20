@@ -11,6 +11,7 @@
     </ui:define>
 
     <ui:define name="content">  
+        <h:link outcome="./CreateOrder.xhtml"> Place Order</h:link>
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{customerWelcomeController.customer.orderslist}" var="order">

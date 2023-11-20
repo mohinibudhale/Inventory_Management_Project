@@ -5,8 +5,6 @@ import edu.iit.sat.itmd4515.mbudhale.domain.Account;
 import edu.iit.sat.itmd4515.mbudhale.domain.AllOrder;
 import edu.iit.sat.itmd4515.mbudhale.domain.Inventory;
 import edu.iit.sat.itmd4515.mbudhale.domain.Product;
-import edu.iit.sat.itmd4515.mbudhale.domain.ProductBrand;
-import edu.iit.sat.itmd4515.mbudhale.domain.ProductCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -112,12 +110,8 @@ public class AccountsJPATest {
     // Testing UniDirectional Relationship
     @Test
     public void testUnidirectionalRelationship() {
-        tx.begin();
-        ProductBrand productBrand = new ProductBrand("Brand 2", "Brand Description 1");
-        em.persist(productBrand);
-        ProductCategory productCategory = new ProductCategory("Category 2", "Product Category Description 1");
-        em.persist(productCategory);
-        Product product = new Product("Product 1", "Unit", 100L, 200L, productBrand, productCategory);
+        tx.begin();        
+        Product product = new Product("Product 1", "KG", 5L, 10L, "brand1", "category1");
         em.persist(product);
         Inventory inventory = new Inventory(10L, 2000L, product);
         em.persist(inventory);
@@ -130,20 +124,14 @@ public class AccountsJPATest {
         tx.begin();
         em.remove(inventory);
         em.remove(product);
-        em.remove(product.getProductBrand());
-        em.remove(product.getProductCategory());
         tx.commit();
 
     }
     // Testing BiDirectional Relationship
     @Test
     public void biDirectionalRelationshipTest() {
-        tx.begin();
-        ProductBrand productBrand = new ProductBrand("Brand 1", "Brand Description 1");
-        em.persist(productBrand);
-        ProductCategory productCategory = new ProductCategory("Category 1", "Product Category Description 1");
-        em.persist(productCategory);
-        Product product = new Product("Product 1", "Unit", 100L, 200L, productBrand, productCategory);
+        tx.begin();       
+        Product product = new Product("Product 1", "Unit", 100L, 200L, "B2", "C2");
         em.persist(product);
         Account account = new Account(AccountType.CUSTOMER, "Customer Name", "customer@email.com", "123-456-7890", "Customer Address", LocalDate.now());
         em.persist(account);
@@ -170,8 +158,6 @@ public class AccountsJPATest {
         tx.begin();
         em.remove(order);
         em.remove(product);
-        em.remove(product.getProductBrand());
-        em.remove(product.getProductCategory());
         em.remove(account);
         tx.commit();
 

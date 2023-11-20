@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/DemoTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:j="http://java.sun.com/jsf/composite/j"
+                xmlns:managedBean="http://xmlns.jcp.org/jsf/composite/managedbean">
+
+    <ui:define name="title">
+        Place a Order
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p>
+                <h:outputLabel for="searchProduct" value="Search Product:" />
+            </p>
+            <h:inputText id="searchProduct" value="#{orderController.searchProduct}">
+                <f:ajax event="keyup" listener="#{orderController.searchProducts}" render="productList" />
+            </h:inputText>
+
+            <h:selectOneMenu id="productList" value="#{orderController.selectedProduct}">
+                <f:selectItems value="#{orderController.productList}" var="product" itemValue="#{product}" itemLabel="#{product.productName}" />
+                <f:ajax listener="#{orderController.productSelected}" render="brand category price unit" />
+            </h:selectOneMenu>
+
+            <p>
+                <h:outputLabel for="brand" value="Product Brand:" />
+                <h:outputText id="brand" value="#{orderController.selectedProduct.productBrand}" />
+            </p>
+
+            <p>
+                <h:outputLabel for="category" value="Product Category:" />
+                <h:outputText id="category" value="#{orderController.selectedProduct.productCategory}" />
+            </p>
+
+            <p>
+                <h:outputLabel for="price" value="Product Price:" />
+                <h:outputText id="price" value="#{orderController.selectedProduct.price}" />
+            </p>
+
+            <p>
+                <h:outputLabel for="quantity" value="Quantity:" />
+                <h:inputText id="quantity" value="#{orderController.quantity}">                        
+                    <f:validateLongRange minimum="1" />
+                </h:inputText>
+            </p>
+
+            <p>
+                <h:outputLabel for="unit" value="Product Unit:" />
+                <h:outputText id="unit" value="#{orderController.selectedProduct.productUnit}" />
+            </p>
+
+            <p>
+                <h:outputLabel for="totalPrice" value="Total Price:" />
+                <h:outputText id="totalPrice" value="#{orderController.calculateTotalPrice}" />
+            </p>
+
+            <p>
+                <h:commandButton action="#{orderController.placeOrder}" value="Place Order" />            
+            </p>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

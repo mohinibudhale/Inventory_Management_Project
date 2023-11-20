@@ -12,6 +12,7 @@
     
     <ui:define name="content">  
         <h:link outcome="./CreateAccount.xhtml"> New Account</h:link>
+        <h:link outcome="./CreateProduct.xhtml"> New Product</h:link>
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{accountService.findAll()}" var="account">

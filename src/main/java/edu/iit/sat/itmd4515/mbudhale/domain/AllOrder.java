@@ -31,7 +31,9 @@ public class AllOrder {
     @Column(name = "ORDER_BALANCE")
     private Long orderBalance;
     @Column(name = "ORDER_DATE")
-    private LocalDate orderDate;
+    private LocalDate orderDate;    
+    private Long Quantity;
+
 
     @ManyToMany
     @JoinTable(name = "ORDER_ITEMS",
@@ -42,7 +44,7 @@ public class AllOrder {
     @ManyToOne
     @JoinColumn(name = "ACCOUNT_ID")
     private Account acc;      
-
+    
     public AllOrder() {
     }
 
@@ -166,6 +168,12 @@ public class AllOrder {
     @Override
     public String toString() {
         return "AllOrder{" + "id=" + id + ", orderType=" + orderType + ", orderPrice=" + orderPrice + ", orderBalance=" + orderBalance + ", orderDate=" + orderDate + '}';
+    }
+    public Long getQuantity() {
+        return Quantity;
+    }
+    public void setQuantity(Long Quantity) {
+        this.Quantity = Quantity;
     }
  
 }

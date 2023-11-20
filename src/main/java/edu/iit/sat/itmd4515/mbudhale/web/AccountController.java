@@ -25,11 +25,6 @@ public class AccountController {
         account = new Account();
     }
 
-    public String demoAction() {
-        LOG.info("In AccountController.demoAction Method invoked!!" + account.toString());
-        return "confirmation.xhtml";
-    }
-
     public AccountType[] getAllAccountType() {
         return AccountType.values();
     }
@@ -39,7 +34,7 @@ public class AccountController {
         accountSvc.create(account);
         
         LOG.info("in AccountController.saveAccount after EJV call"+account.toString());
-        return "confirmation.xhtml";
+        return "/admin/welcome.xhtml";
         
     }
     public Account getAccount() {

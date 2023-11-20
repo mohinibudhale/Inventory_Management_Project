@@ -5,8 +5,6 @@ import edu.iit.sat.itmd4515.mbudhale.domain.AccountType;
 import edu.iit.sat.itmd4515.mbudhale.domain.AllOrder;
 import edu.iit.sat.itmd4515.mbudhale.domain.Inventory;
 import edu.iit.sat.itmd4515.mbudhale.domain.Product;
-import edu.iit.sat.itmd4515.mbudhale.domain.ProductBrand;
-import edu.iit.sat.itmd4515.mbudhale.domain.ProductCategory;
 import edu.iit.sat.itmd4515.mbudhale.security.Group;
 import edu.iit.sat.itmd4515.mbudhale.security.GroupService;
 import edu.iit.sat.itmd4515.mbudhale.security.User;
@@ -29,10 +27,7 @@ public class StartupSingletonService {
     OrderService orderSvc;
     @EJB
     AccountService accountSvc;
-    @EJB
-    BrandService brandSvc;
-    @EJB
-    CategoryService categorySvc;
+  
     @EJB
     InventoryService inventorySvc;
     @EJB
@@ -95,29 +90,10 @@ public class StartupSingletonService {
         accountSvc.create(a2);
         accountSvc.create(a3);
         
-        
-        ProductBrand pb1 = new ProductBrand("Lays", "Lays Chips");
-        ProductBrand pb2 = new ProductBrand("Friendly Farm", "Whole Milk");
-        ProductBrand pb3 = new ProductBrand("Rold Gold", "Rold Gold tiny twist");
-        brandSvc.create(pb1);
-        brandSvc.create(pb2);
-        brandSvc.create(pb3);
-
-        ProductCategory pc1 = new ProductCategory("Savory products", "Snacks,Chips, pretzels");
-        ProductCategory pc2 = new ProductCategory("Dairy products", "whole milk, fat milk, low fat milk, fat free milk");
-        categorySvc.create(pc1);
-        categorySvc.create(pc2);
-
-        Product p1 = new Product("Whole Milk", "l", 5L, 10L, null, null);
-        p1.setProductBrand(pb2);
-        p1.setProductCategory(pc2);
-        Product p2 = new Product("Lays Chips", "LB", 10L, 20L, null, null);
-        p2.setProductBrand(pb1);
-        p2.setProductCategory(pc1);
-        Product p3 = new Product("Pretzels", "LB", 30L, 35L, null, null);
-        p3.setProductBrand(pb3);
-        p3.setProductCategory(pc1);
-
+        Product p1 = new Product("Whole Milk", "l", 5L, 10L, "BB1", "CC1");       
+        Product p2 = new Product("Lays Chips", "LB", 10L, 20L, "BB2", "CC2");       
+        Product p3 = new Product("Pretzels", "LB", 30L, 35L, "BB3", "CC3");
+       
         productSvc.create(p1);
         productSvc.create(p2);
         productSvc.create(p3);

@@ -30,6 +30,13 @@ public class ProductService {
         em.remove(em.merge(p));
     }
     
+    public List<Product> searchProducts(String searchTerm) {
+         
+        return em.createQuery("SELECT p FROM Product p WHERE p.productName LIKE :searchTerm", Product.class)
+                .setParameter("searchTerm", "%" + searchTerm + "%")
+                .getResultList();
+    }
+    
     public List<Product> findAll()
     {
         return em.createNamedQuery("product.findAll", Product.class).getResultList();
