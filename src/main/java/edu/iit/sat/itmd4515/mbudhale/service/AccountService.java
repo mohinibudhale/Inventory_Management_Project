@@ -1,4 +1,3 @@
-
 package edu.iit.sat.itmd4515.mbudhale.service;
 
 import edu.iit.sat.itmd4515.mbudhale.domain.Account;
@@ -13,16 +12,36 @@ public class AccountService extends AbstractService<Account> {
     public AccountService() {
         super(Account.class);
     }
-    public List<Account> findAll()
-    {
+
+    public List<Account> findAll() {
         return super.findAll("Account.findAll");
     }
-    
-    public Account findByUsername(String username)
-    {
-        return em.createNamedQuery("Account.findByUsername",Account.class)
+
+    public Account findByUsername(String username) {
+        return em.createNamedQuery("Account.findByUsername", Account.class)
                 .setParameter("uname", username)
                 .getSingleResult();
     }
-    
+
+    public void updateAccount(Account a) {
+        Account managedAccRef = em.getReference(Account.class, a.getId());
+        managedAccRef.setCompany_Name(a.getCompany_Name());
+        managedAccRef.setType(a.getType());
+        managedAccRef.setEmail(a.getEmail());
+        managedAccRef.setPhone(a.getPhone());
+        managedAccRef.setAddress(a.getAddress());
+        managedAccRef.setCreated_Date(a.getCreated_Date());
+        em.merge(managedAccRef);
+
+    }
+
+    public void deleteAccount(Account a) {
+        Account managedAccRef = em.getReference(Account.class, a.getId());
+        if (managedAccRef != null) {
+            em.remove(managedAccRef);
+        } else {
+            System.out.println("Account with ID " + a.getId() + " not found for deletion.");
+        }
+    }
+
 }

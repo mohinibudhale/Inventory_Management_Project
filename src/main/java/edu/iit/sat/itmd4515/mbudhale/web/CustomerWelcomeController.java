@@ -40,7 +40,10 @@ public class CustomerWelcomeController {
         LOG.info("Leaving CustomerWelcomeController.postConstruct with"+ customer.toString());
     }   
     
-    
+//    public void refreshAccount()
+//    {
+//        customer = accountSvc.findByUsername(loginController.getCurrentUser());
+//    }
     public Account getCustomer() {
         return customer;
     }

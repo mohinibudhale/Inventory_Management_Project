@@ -9,44 +9,58 @@
     <ui:define name="title">
         Admin Welcome Page
     </ui:define>
-    
+
     <ui:define name="content">  
-        <h:link outcome="./CreateAccount.xhtml"> New Account</h:link>
-        <h:link outcome="./CreateProduct.xhtml"> New Product</h:link>
+        <div>
+            <h:outputLink value="./CreateAccount.xhtml" styleClass="custom-link">New Account</h:outputLink>
+        </div>       
+
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{accountService.findAll()}" var="account">
-        <h:column>
-            <f:facet name="header">Account ID</f:facet>
-            <h:outputText value="#{account.id}"/>
-        </h:column> 
-            
-        <h:column>
-            <f:facet name="header">Account Type</f:facet>
-            <h:outputText value="#{account.type}"/>
-        </h:column> 
-            
-        <h:column>
-            <f:facet name="header">Account Name</f:facet>
-            <h:outputText value="#{account.company_Name}"/>
-        </h:column> 
-        <h:column>
-            <f:facet name="header">Account Email</f:facet>
-            <h:outputText value="#{account.email}"/>
-        </h:column> 
-        <h:column>
-            <f:facet name="header">Account Generated Date</f:facet>
-            <h:outputText value="#{account.created_Date}">
-                <f:convertDateTime type="localDate" dateStyle="full"/>
-            </h:outputText>
-        </h:column> 
-            
+            <h:column>
+                <f:facet name="header">Account ID</f:facet>
+                <h:outputText value="#{account.id}"/>
+            </h:column> 
+
+            <h:column>
+                <f:facet name="header">Account Type</f:facet>
+                <h:outputText value="#{account.type}"/>
+            </h:column> 
+
+            <h:column>
+                <f:facet name="header">Account Name</f:facet>
+                <h:outputText value="#{account.company_Name}"/>
+            </h:column> 
+            <h:column>
+                <f:facet name="header">Account Email</f:facet>
+                <h:outputText value="#{account.email}"/>
+            </h:column> 
+            <h:column>
+                <f:facet name="header">Account Contact</f:facet>
+                <h:outputText value="#{account.phone}"/>
+            </h:column> 
+            <h:column>
+                <f:facet name="header">Account Generated Date</f:facet>
+                <h:outputText value="#{account.created_Date}">
+                    <f:convertDateTime type="localDate" dateStyle="full"/>
+                </h:outputText>
+            </h:column> 
+
             <h:column>
                 <f:facet name="header">#Orders</f:facet>
                 <h:outputText value="#{account.orderslist.size()}"/>
             </h:column>
+            
+            <h:column>
+                <h:form>
+                    <h:commandButton value="Read" action="#{accountController.diplayAccountDetailsPage(account)}"/>
+                    <h:commandButton value="Update" action="#{accountController.diplayUpdateAccountPage(account)}"/>
+                    <h:commandButton value="Delete" action="#{accountController.diplayDeleteAccountPage(account)}"/>          
+                </h:form>
+            </h:column>
 
-    </h:dataTable>
+        </h:dataTable>
     </ui:define>
 
 </ui:composition>
