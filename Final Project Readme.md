@@ -1,5 +1,6 @@
 
 Project Summary
+
 o Use this section to describe the project in your own words.
 This project is an example of an application that any small business that offers products can utilize to manage their products and sales data.
 There are two main user-types, Admin, and Customer. Each user-type has their own UI portal.
