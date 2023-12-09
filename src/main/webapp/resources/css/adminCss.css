@@ -1,0 +1,37 @@
+
+.bg-image {
+    background-image: url('/mbudhale-fp/backgroundlogin.jpg');
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    height: 100vh; 
+}
+html,
+body {
+    margin-top: 50px;    
+    padding: 0;
+}
+
+.table {
+    width: 100%;
+    margin-top: 20px; 
+}
+
+.table th, .table td {
+    text-align: center;
+}
+
+.table th {
+    background-color: #343a40;
+    color: #ffffff; 
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e2e6ea; 
+}
+
+

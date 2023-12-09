@@ -1,0 +1,8 @@
+.custom-input {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
+    min-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
+    line-height: 1.25;
+    border-radius: var(--bs-border-radius-sm);
+}

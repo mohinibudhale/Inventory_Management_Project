@@ -34,6 +34,10 @@ public class StartupSingletonService {
     GroupService groupSvc;
     @EJB
     UserService userSvc;
+    
+    private Group customerGroup;
+    private Group employeeGroup;
+    private Group adminGroup;
 
     public StartupSingletonService() {
     }
@@ -43,9 +47,9 @@ public class StartupSingletonService {
         LOG.info("StartupSingletonService.postConstruct");
 
         //Security Domain Initialization
-        Group customerGroup = new Group("CUSTOMER_GROUP", "This is customer group in security realm representing customers");
-        Group employeeGroup = new Group("EMPLOYEE_GROUP", "This is employee group in security realm representing employees");
-        Group adminGroup = new Group("ADMIN_GROUP", "This is admin group in security realm representing administrative users");
+        customerGroup = new Group("CUSTOMER_GROUP", "This is customer group in security realm representing customers");
+        employeeGroup = new Group("EMPLOYEE_GROUP", "This is employee group in security realm representing employees");
+        adminGroup = new Group("ADMIN_GROUP", "This is admin group in security realm representing administrative users");
 
         groupSvc.create(customerGroup);
         groupSvc.create(employeeGroup);
@@ -82,7 +86,7 @@ public class StartupSingletonService {
         if (a2.isValidAccount()) {            
             a2.setUser(customer2);
         }
-        Account a3 = new Account(AccountType.EMPLOYEE, "emp1", "emp1@test.com", "1234567892", "15L E 32nd St 60616", LocalDate.now());
+        Account a3 = new Account(AccountType.EMPLOYEE, "sky company", "emp1@test.com", "1234567892", "15L E 32nd St 60616", LocalDate.now());
         if (a3.isValidAccount()) {            
             a3.setUser(employee1);
         }
@@ -145,6 +149,30 @@ public class StartupSingletonService {
             LOG.info("\t" + p.getProductBrand());
             LOG.info("\t" + p.getProductCategory() + "\n");
         }
+    }
+
+    public Group getCustomerGroup() {
+        return customerGroup;
+    }
+
+    public void setCustomerGroup(Group customerGroup) {
+        this.customerGroup = customerGroup;
+    }
+
+    public Group getEmployeeGroup() {
+        return employeeGroup;
+    }
+
+    public void setEmployeeGroup(Group employeeGroup) {
+        this.employeeGroup = employeeGroup;
+    }
+
+    public Group getAdminGroup() {
+        return adminGroup;
+    }
+
+    public void setAdminGroup(Group adminGroup) {
+        this.adminGroup = adminGroup;
     }
 
 }

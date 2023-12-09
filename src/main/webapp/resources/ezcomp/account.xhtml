@@ -11,84 +11,151 @@
         <cc:attribute name="account" type="edu.iit.sat.itmd4515.mbudhale.domain.Account" required="true"/>
         <cc:attribute name="action" method-signature="java.lang.String action()" required="false"/>
         <cc:attribute name="operation" type="java.lang.String" required="true"/>
+        <cc:attribute name="user" type="edu.iit.sat.itmd4515.mbudhale.security.User" required="true"/>        
     </cc:interface>
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <h:form>
-            <p>
-                <h:panelGroup layout="block" rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
-                    <h:outputLabel for="accountId" value="Account ID #{cc.attrs.account.id}" />
-                    <h:inputHidden id="accountId" value="#{cc.attrs.account.id}" />
-                    <h:message for="accountId"/>
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="accountType" value="Account Type:" />
-                    <h:selectOneMenu readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                                     disabled="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        id="accountType" value="#{cc.attrs.account.type}">
-                        <f:selectItems value="#{accountController.allAccountType}" var="accountType" 
-                                       itemLabel="#{accountType.label}" itemValue="#{accountType}" />
-                    </h:selectOneMenu>
-                    <h:message for="accountType" styleClass="error-message" />
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="Name" value="Name:" />
-                    <h:inputText readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        id="Name" value="#{cc.attrs.account.company_Name}" />
-                    <h:message for="Name" styleClass="error-message" />
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="email" value="Email:" />
-                    <h:inputText readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        id="email" value="#{cc.attrs.account.email}" />
-                    <h:message for="email" styleClass="error-message" />
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="phone" value="Phone:" />
-                    <h:inputText readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        id="phone" value="#{cc.attrs.account.phone}" />
-                    <h:message for="phone" styleClass="error-message" />
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="address" value="Address:" />
-                    <h:inputText readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        id="address" value="#{cc.attrs.account.address}" />
-                    <h:message for="address" styleClass="error-message" />
-                </h:panelGroup>
-            </p>
-            <p>
-                <h:panelGroup layout="block">
-                    <h:outputLabel for="createdDate" value="Added Date:" />
-                    <h:inputText readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                        p:type="date" id="createdDate" value="#{cc.attrs.account.created_Date}">                            
-                        <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
-                    </h:inputText>
-                    <h:message for="createdDate"/>
-                </h:panelGroup>  
-            </p>
-            <p>
-                <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
-                    action="#{cc.attrs.action}" value="Add Account" />            
-            </p>
-             <p>
-                <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('Delete')}"
-                    action="#{cc.attrs.action}" value="Delete Account" />            
-            </p>
-             <p>
-                <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('Update')}"
-                    action="#{cc.attrs.action}" value="Update Account" />            
-            </p>
+         <div class="bg-image">
+        <h:form class="mt-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="UserName" value="User Name:" rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                <h:inputText 
+                                    rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"                                  
+                                    id="UserName" value="#{cc.attrs.user.userName}" 
+                                    styleClass="form-control form-control-sm"/>
+                                <h:message for="UserName" styleClass="error-message" />                   
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="NewPassword" 
+                                               value="Password: "
+                                               rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}" />
+
+                                <h:inputSecret 
+                                    rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
+                                    styleClass="form-control form-control-sm"
+                                    id="NewPassword" 
+                                    p:placeholder="Password"
+                                    value="#{cc.attrs.user.password}"/>
+
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:inputHidden id="accountId" value="#{cc.attrs.account.id}"/>
+                                <h:message for="accountId"/>
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:selectOneMenu 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    disabled="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    id="accountType" value="#{cc.attrs.account.type}"
+                                    styleClass="form-select form-select-lg">
+                                    <f:selectItem itemLabel="-- Select Account Type --" itemValue="" />
+                                    <f:selectItems value="#{accountController.allAccountType}" var="accountType" 
+                                                   itemLabel="#{accountType.label}" itemValue="#{accountType}" 
+                                                   rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                </h:selectOneMenu>
+                                <h:message for="accountType" styleClass="error-message" />
+                            </h:panelGroup>
+                        </div>
+
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="Name" value="Company Name: " rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                <h:inputText 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    id="Name" value="#{cc.attrs.account.company_Name}" 
+                                    styleClass="form-control form-control-lg"/>
+                                <h:message for="Name" styleClass="error-message" />
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="email" value="email: " rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                <h:inputText 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    id="email" value="#{cc.attrs.account.email}" 
+                                    styleClass="form-control form-control-lg"/>
+                                <h:message for="email" styleClass="error-message" />
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="phone" value="phone: " rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                <h:inputText 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    id="phone" value="#{cc.attrs.account.phone}" 
+                                    styleClass="form-control form-control-lg"/>
+                                <h:message for="phone" styleClass="error-message" />
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:outputLabel for="address" value="address: " rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"/>
+                                <h:inputText 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    id="address" value="#{cc.attrs.account.address}" 
+                                    styleClass="form-control form-control-lg"/>
+                                <h:message for="address" styleClass="error-message" />
+                            </h:panelGroup>
+                        </div>
+
+                        <div class="mb-3">
+                            <h:panelGroup styleClass="form-floating">
+                                <h:inputText 
+                                    readonly="#{cc.attrs.operation.equalsIgnoreCase('Read') or cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                    p:type="date" id="createdDate" value="#{cc.attrs.account.created_Date}" 
+                                    styleClass="form-control form-control-sm">                            
+                                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd" />
+                                </h:inputText>
+                                <h:message for="createdDate"/>
+                            </h:panelGroup>  
+                        </div>
+
+                        <div class="mb-3">
+                            <h:commandButton 
+                                rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}"
+                                action="#{cc.attrs.action}" 
+                                value="Add Account" 
+                                styleClass="btn btn-primary btn-lg"/>            
+                        </div>
+
+                        <div class="mb-3">
+                            <h:commandButton 
+                                rendered="#{cc.attrs.operation.equalsIgnoreCase('Delete')}"
+                                action="#{cc.attrs.action}" 
+                                value="Delete Account" 
+                                styleClass="btn btn-danger btn-lg"/>            
+                        </div>
+
+                        <div class="mb-3">
+                            <h:commandButton 
+                                rendered="#{cc.attrs.operation.equalsIgnoreCase('Update')}"
+                                action="#{cc.attrs.action}" 
+                                value="Update Account" 
+                                styleClass="btn btn-warning btn-lg"/>            
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
         </h:form> 
+         </div>
     </cc:implementation>
 </html>

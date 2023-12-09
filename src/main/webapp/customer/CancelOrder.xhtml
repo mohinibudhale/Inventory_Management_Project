@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/DemoTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:j="http://java.sun.com/jsf/composite/j"
+                xmlns:managedBean="http://xmlns.jcp.org/jsf/composite/managedbean">
+
+    <ui:define name="title">
+        Cancel Order
+        <h:outputStylesheet library="css" name="adminCss.css"/>
+    </ui:define>
+    <ui:define name="content">
+         <div class="bg-image">
+        <h:form style="color: white">
+            <h> are you sure you want to cancel order?</h>
+            
+            <p:outputLabel value="Order ID: " for="orderId" />
+            <p:inputText id="orderId" value="#{orderController.selectedOrder.id}" readonly="true" />
+
+            <p:outputLabel value="Order Type: " for="orderType" />
+            <p:inputText id="orderType" value="#{orderController.selectedOrder.orderType}" readonly="true"/>
+
+            <p:outputLabel value="Order Price: " for="orderPrice" />
+            <p:inputText id="orderPrice" value="#{orderController.selectedOrder.orderPrice}" readonly="true" />
+
+            <p:outputLabel value="Order Balance: " for="orderBalance" />
+            <p:inputText id="orderBalance" value="#{orderController.selectedOrder.orderBalance}" readonly="true" />
+
+            <p:outputLabel value="Order Date: " for="orderDate" />
+            <p:inputText id="orderDate" value="#{orderController.selectedOrder.orderDate}" readonly="true" />
+
+            <p:outputLabel value="Quantity: " for="quantity" />
+            <p:inputText id="quantity" value="#{orderController.selectedOrder.quantity}" readonly="true" />
+            <p>
+                <h:commandButton value="Cancel Order" actionListener="#{orderController.cancelOrder}" />
+            </p>
+        </h:form>
+         </div>
+    </ui:define>
+</ui:composition>

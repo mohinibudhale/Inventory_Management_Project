@@ -11,12 +11,16 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @NamedQuery(name="product.findAll",query="select p from Product p")
+@NamedQuery(name = "Product.findProductById", query = "select p from Product p where p.id = :id")
+
 @Table(name = "Product")
 public class Product {
 
@@ -24,6 +28,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
     private Long id;
+    
     @Column(name = "PRODUCT_NAME")
     @NotBlank(message = "Product name is required")
     private String productName;
@@ -32,6 +37,7 @@ public class Product {
     @NotBlank(message = "Product Unit is required")
     private String productUnit;
     
+
     @Column(name = "PRODUCT_COST")
     @NotNull(message = "Product Cost is required")
     private Long cost;
@@ -50,22 +56,27 @@ public class Product {
     private String productCategory;
 
     @ManyToMany(mappedBy = "orderItems")
-    private Set<AllOrder> orders = new HashSet<>();
+    private List<AllOrder> orders = new ArrayList<AllOrder>();
 
     @OneToOne(mappedBy = "product")
     private Inventory inventory;
 
-    public Product() {
-    }
+   
 
-    public Product(String productName, String productUnit, Long cost, Long price, String productBrand, String productCategory) {
+    public Product(String productName, String productUnit, long cost, long price, String productBrand, String productCategory) {
         this.productName = productName;
         this.productUnit = productUnit;
         this.cost = cost;
         this.price = price;
         this.productBrand = productBrand;
         this.productCategory = productCategory;
+        this.inventory = inventory;
     }
+
+    public Product() {
+    }
+
+
 
 
     public Long getId() {
@@ -149,13 +160,7 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Set<AllOrder> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<AllOrder> orders) {
-        this.orders = orders;
-    }
+   
 
     public Inventory getInventory() {
         return inventory;
@@ -170,6 +175,13 @@ public class Product {
         return "Product{" + "id=" + id + ", productName=" + productName + ", productUnit=" + productUnit + ", cost=" + cost + ", price=" + price + '}';
     }
 
+    public List<AllOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<AllOrder> orders) {
+        this.orders = orders;
+    }   
    
 
 }

@@ -7,23 +7,26 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        Admin Welcome Page
+        Accounts
+        <h:outputStylesheet library="css" name="adminCss.css"/>
     </ui:define>
 
     <ui:define name="content">  
-        <div>
-            <h:outputLink value="./CreateAccount.xhtml" styleClass="custom-link">New Account</h:outputLink>
+        <div class="bg-image">
+        <div class="text-center mt-5 mb-4">
+            <h:outputLink value="./CreateAccount.xhtml" styleClass="btn btn-primary btn-lg">New Account</h:outputLink>
         </div>       
 
         <h:dataTable 
             styleClass="table table-striped table-hover"
             value="#{accountService.findAll()}" var="account">
+
             <h:column>
                 <f:facet name="header">Account ID</f:facet>
                 <h:outputText value="#{account.id}"/>
             </h:column> 
 
-            <h:column>
+             <h:column>
                 <f:facet name="header">Account Type</f:facet>
                 <h:outputText value="#{account.type}"/>
             </h:column> 
@@ -52,15 +55,17 @@
                 <h:outputText value="#{account.orderslist.size()}"/>
             </h:column>
             
+
             <h:column>
                 <h:form>
-                    <h:commandButton value="Read" action="#{accountController.diplayAccountDetailsPage(account)}"/>
-                    <h:commandButton value="Update" action="#{accountController.diplayUpdateAccountPage(account)}"/>
-                    <h:commandButton value="Delete" action="#{accountController.diplayDeleteAccountPage(account)}"/>          
+                    <div class="btn-group">
+                        <h:commandButton value="Read" action="#{accountController.diplayAccountDetailsPage(account)}" styleClass="btn btn-info"/>
+                        <h:commandButton value="Update" action="#{accountController.diplayUpdateAccountPage(account)}" styleClass="btn btn-warning"/>
+                        <h:commandButton value="Delete" action="#{accountController.diplayDeleteAccountPage(account)}" styleClass="btn btn-danger"/>          
+                    </div>
                 </h:form>
             </h:column>
-
         </h:dataTable>
+        </div>
     </ui:define>
-
 </ui:composition>

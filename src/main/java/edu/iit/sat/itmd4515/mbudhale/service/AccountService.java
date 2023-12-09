@@ -22,6 +22,12 @@ public class AccountService extends AbstractService<Account> {
                 .setParameter("uname", username)
                 .getSingleResult();
     }
+    
+     public Account getAccountById(Long id) {
+        return em.createNamedQuery("Account.getAccountById", Account.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
 
     public void updateAccount(Account a) {
         Account managedAccRef = em.getReference(Account.class, a.getId());
@@ -34,10 +40,10 @@ public class AccountService extends AbstractService<Account> {
         em.merge(managedAccRef);
 
     }
-
+   
     public void deleteAccount(Account a) {
-        Account managedAccRef = em.getReference(Account.class, a.getId());
-        if (managedAccRef != null) {
+        Account managedAccRef = em.find(Account.class, a.getId());
+        if (managedAccRef != null) {            
             em.remove(managedAccRef);
         } else {
             System.out.println("Account with ID " + a.getId() + " not found for deletion.");

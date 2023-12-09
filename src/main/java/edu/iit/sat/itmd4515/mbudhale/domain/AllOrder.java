@@ -12,12 +12,16 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @NamedQuery(name="AllOrder.findAll",query="select o from AllOrder o")
+@NamedQuery(name = "AllOrder.findById", query = "SELECT o FROM AllOrder o WHERE o.acc.id = :id")
+@NamedQuery(name = "AllOrder.findOrderById", query = "SELECT o FROM AllOrder o WHERE o.id = :id")
 @Table(name = "AllOrder")
 public class AllOrder {
     @Id
@@ -39,7 +43,7 @@ public class AllOrder {
     @JoinTable(name = "ORDER_ITEMS",
             joinColumns = @JoinColumn(name = "ORDER_ID"),
             inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
-    private Set<Product> orderItems = new HashSet<>();
+    private List<Product> orderItems = new ArrayList<Product>();
     //owening side of bidirectional relationship
     @ManyToOne
     @JoinColumn(name = "ACCOUNT_ID")
@@ -121,13 +125,6 @@ public class AllOrder {
         this.orderDate = orderDate;
     }
 
-    public Set<Product> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(Set<Product> orderItems) {
-        this.orderItems = orderItems;
-    }
 
     public Account getAcc() {
         return acc;
@@ -174,6 +171,14 @@ public class AllOrder {
     }
     public void setQuantity(Long Quantity) {
         this.Quantity = Quantity;
+    }
+
+    public List<Product> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<Product> orderItems) {
+        this.orderItems = orderItems;
     }
  
 }

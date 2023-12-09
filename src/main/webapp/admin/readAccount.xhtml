@@ -3,15 +3,20 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="../WEB-INF/templates/DemoTemplate.xhtml"
-                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+                xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="title">
-        Read-Only Account Details Page
+        Account Details
+        <h:outputStylesheet library="css" name="adminCss.css"/>
     </ui:define>
 
     <ui:define name="content">  
-        <ezcomp:account account="#{accountController.account}"
+        <div class="bg-image">
+        <ezcomp:account account="#{accountController.account}"                        
+                        user="#{accountController.user}"
                         operation="Read"/>
+        </div>
     </ui:define>
 
 </ui:composition>

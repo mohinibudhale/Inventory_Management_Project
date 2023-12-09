@@ -13,17 +13,16 @@
     <h:body class="d-flex align-items-center py-4 bg-body-tertiary">
         <main class="form-signin w-100 m-auto">           
             <h:form>
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-                <h:panelGroup styleClass="form-floating" layout="block">                    
+                <h1 class="h3 mb-3 fw-normal text-white">Sign in</h1>
+                <h:panelGroup styleClass="form-floating mb-3" layout="block">
                     <h:inputText 
                         binding="#{uname}"
                         styleClass="#{uname.valid ? 'form-control' : 'form-control is-invalid'}"
                         id="UserName" 
                         p:placeholder="Username"
-                        value="#{loginController.user.userName}"/>
+                        value="#{loginController.user.userName}" />
                     <h:message for="UserName" styleClass="text-danger"/>
-                    <h:outputLabel for="UserName" value="User Name:  "/>
+                    <h:outputLabel for="UserName" value="User Name:" styleClass="mb-2" />
                 </h:panelGroup>
 
                 <h:panelGroup styleClass="form-floating" layout="block">                    

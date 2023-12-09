@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="../WEB-INF/templates/DemoTemplate.xhtml"
@@ -5,14 +7,16 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        Customer Welcome Page
+       List of Orders
+       <h:outputStylesheet library="css" name="adminCss.css"/>
     </ui:define>
 
-    <ui:define name="content">  
-        <h:link outcome="./CreateOrder.xhtml">Place Order</h:link>
-        <h:dataTable 
+    <ui:define name="content"> 
+        <div class="bg-image">
+        <h:dataTable             
             styleClass="table table-striped table-hover"
-            value="#{customerWelcomeController.ordersList}" var="order">
+            value="#{orderService.findAll()}" var="order">
+            
             <h:column>
                 <f:facet name="header">#Customer Name</f:facet>
                 <h:outputText value="#{order.acc.company_Name}"/>
@@ -23,6 +27,10 @@
                 <h:outputText value="#{order.id}"/>
             </h:column>        
 
+            <h:column>
+                <f:facet name="header">Order Type</f:facet>
+                <h:outputText value="#{order.orderType}"/>
+            </h:column> 
             <h:column>
                 <f:facet name="header">Order Price</f:facet>
                 <h:outputText value="#{order.orderPrice}"/>
@@ -37,15 +45,10 @@
                 <h:outputText value="#{order.orderDate}">
                     <f:convertDateTime type="localDate" dateStyle="full"/>
                 </h:outputText>
-            </h:column>                    
-
-            <h:column>
-                <f:facet name="header">Cancel Order</f:facet>
-                <h:button value="Cancel Order" outcome="/customer/CancelOrder.xhtml">
-                    <f:param name="orderId" value="#{order.id}" />
-                </h:button>
-            </h:column>
-
+            </h:column> 
+            
         </h:dataTable>
+        </div>
     </ui:define>
+
 </ui:composition>

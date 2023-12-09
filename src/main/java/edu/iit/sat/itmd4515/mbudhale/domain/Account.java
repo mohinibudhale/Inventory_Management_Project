@@ -1,6 +1,7 @@
 package edu.iit.sat.itmd4515.mbudhale.domain;
 
 import edu.iit.sat.itmd4515.mbudhale.security.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -24,6 +25,7 @@ import java.util.Objects;
 @Entity
 @NamedQuery(name = "Account.findAll", query = "select a from Account a")
 @NamedQuery(name = "Account.findByUsername", query = "select a from Account a where a.user.userName = :uname")
+@NamedQuery(name = "Account.getAccountById", query = "select a from Account a where a.id = :id")
 @Table(name = "Account")
 public class Account {
 
@@ -32,7 +34,7 @@ public class Account {
     @Column(name = "ACCOUNT_ID")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "USERNAME", unique = true)
     private User user;
 
@@ -62,7 +64,7 @@ public class Account {
     @NotNull(message = "Created date is required")
     private LocalDate created_Date;
 
-    @OneToMany(mappedBy = "acc")
+    @OneToMany(mappedBy = "acc", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AllOrder> orderslist = new ArrayList<>();
 
     //Checking if Account Type is customer or Employee

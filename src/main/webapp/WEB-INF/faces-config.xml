@@ -8,5 +8,9 @@
         <phase-listener>
             edu.iit.sat.itmd4515.mbudhale.web.JSFPhaseListener
         </phase-listener>
+        <converter>
+            <converter-for-class>edu.iit.sat.itmd4515.mbudhale.domain.Product</converter-for-class>
+            <converter-class>edu.iit.sat.itmd4515.mbudhale.web.ProductConverter</converter-class>
+        </converter>
     </lifecycle>
 </faces-config>

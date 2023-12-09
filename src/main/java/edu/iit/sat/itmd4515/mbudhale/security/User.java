@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "SEC_USER")
 @NamedQuery(name="User.findAll",query="select u from User u")
+@NamedQuery(name = "User.findByUsername", query = "select u from User u where u.userName = :uname")
 @EntityListeners(UserPasswordHash.class)
 public class User{
 
@@ -87,6 +88,11 @@ public class User{
             this.groups.remove(g);
             g.getUsers().remove(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "userName=" + userName + ", password=" + password + ", enabled=" + enabled + '}';
     }
 
 }

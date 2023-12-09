@@ -7,18 +7,15 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="title">
-        Delete Account
+        Update Product
         <h:outputStylesheet library="css" name="adminCss.css"/>
     </ui:define>
 
     <ui:define name="content">  
         <div class="bg-image">
-        <h2 style="color: white"> Are you sure you want to delete #{accountController.account.company_Name}?</h2>
-        <ezcomp:account account="#{accountController.account}"
-                        user="#{accountController.user}"
-                        operation="Delete"
-                        action="#{accountController.deleteAccount()}"/>
+         <ezcomp:product product="#{productController.product}"
+                        operation="Update"
+                        action="#{productController.updateProduct()}"/>
         </div>
     </ui:define>
-
 </ui:composition>
