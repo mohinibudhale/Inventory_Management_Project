@@ -68,24 +68,132 @@ Jakarta EE api (dependencies/libraries in pom.xml file of project)
 o Include enough screen captures to illustrate your working project.
 Screen captures:
 
+Sign In page:
+
+Login with cred username admin password admin
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/0beabf3f-eb10-4acc-a34c-4c4d059c5fac)
+
+If we dont enter any of the field it gives error 
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/57ce36b1-0ad9-4c4f-a027-43207fc5d970)
+
+Welcome page/ Home Page 
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/80120b50-f69c-495d-be91-d8897621b573)
+
+
+To navigate click on the options in navigation bar 
+when click on accounts
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/ed79b88e-2cfa-4d79-ae4e-53fc0446912d)
+
+
+when click on products
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/a3ee7b02-f98c-44bb-8467-f1bd9394dc18)
+
+when click on orders
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/b73fbe8e-63da-4cd1-b805-2082f182f0b8)
+
+
+back to accounts when click on new account its scrollable page you can scroll if you dont see any fields
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/da5f26e1-e2a0-4ef8-8800-7816210f5285)
+
+creating a new account/user please choose account type as customer
+username- customer i entered and password customer
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/1c7a90d5-a995-440c-892f-47bbffd90e84)
+
+
+when i click on add account button it takes me to accounts page where i can see the latest added account/user
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/315f8385-fe96-4e70-9e7a-375d538cd4b2)
+
+now logging out and trying to login through user customer
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/721f8350-8d32-470a-bb87-332e86990e6a)
+
+this is customer welcome/home page 
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/39b7b471-715b-4acb-aeb7-6534224f0c79)
+
+now navigate to orders in navigation bar
+ you can see for this newly  created user there are no orders
+ ![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/6c0cf413-fb9e-4d9b-949a-f21947e28448)
+
+
+ now click on place order
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/f562a40f-2efc-4fe5-b355-38355ec36f18)
+
+
+now search for product pretzels type p and you will see product in dropdown primefaces dropdown then click on product and it will populate all its information then click on quantity and you can see total price is automatically getting calculated 
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/46405503-7823-4784-8c2f-4536b22482d0)
+
+and click on place order and you will see order in orders section 
+now you can see one order 
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/547905fe-3f86-440c-9655-67f3d98fa186)
+
+do not delete a user/account who already placed a order
+now logging out from cutomer and logging in as admin if you go to orders section you will see a new order added
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/8ae7d57a-a409-45df-8c80-992ebb4805cc)
 
 
 
+Admin can create a account, update it and delete it 
+
+here are read account,update,delete pages
+
+read account
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/b951f4d3-5d9a-4ecb-8129-fd787370c010)
+
+update account
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/cdf2c7db-8a09-4d75-bb71-103762838c3a)
+
+you can see star plaza1 is updated 
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/680d2bad-1a9a-425d-bf2f-609e0882c330)
+
+lets create a new demo account and delete it without placing any order
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/6c30b238-3f54-42b0-8ba0-1c4bcf218dfa)
 
 
+now lets delete demo1234
 
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/5bef2d5d-357d-400c-bed9-a5fb3b28004a)
+
+
+when you click on delete account it deletes the account you can see that in accounts section
+
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/2ac4ea9d-7487-40f3-a887-6e9b3a661b8c)
+
+
+Same we can do for products we can add a product
+
+i have added this chips product
+![image](https://github.com/itmd4515/itmd4515-f23-fp-mohinivbudhale/assets/143038221/403074eb-baf0-418d-a851-fa2503e4d4c0)
+ and we can update it and delete it
+
+ 
 
 
 • Expected Results/Known Issues
 o Use this section to describe any known issues with your project. Nothing is ever
 perfect, and it is better to document issues than ignore them.
-When user attempts to login with incorrect credentials, project does not validate credentials in front-end layer. It navigates to the error page, and validates the user credentials in the backend. Delete order functionality may not work as I’m unable to fetch pk id from UI to delete the particular data.
+
+When user attempts to login with incorrect credentials, project does not validate credentials in front-end layer. It navigates to the error page, and validates the user credentials in the backend. Delete order/product functionality may not work as I’m unable to fetch pk id from UI to delete the particular data.
 
 o Also, provide me with a known working test script to follow when I run your
 project. For example:
- Login as admin with password admin
-You can create user from admin portal and log in with that user. Otherwise, for customer portal, log in with these credentials: user “customer1” and password “customer1”
-When placing order, search with the product name “Pretzels”, or “Whole Milk”, or “Lays Chips” 
+ 
+1.Login as admin with password admin
+2.You can create user from admin portal and log in with that user. Otherwise, for customer portal, log in with these credentials: user “customer1” and password “customer1”
+3.When placing order, search with the product name “Pretzels”, or “Whole Milk”, or “Lays Chips” 
+4. Please do not delete user who placed orders you can create new account and delete it.
 
 • Development Insights
 o Use this section to tell me anything you want about the project, and your
