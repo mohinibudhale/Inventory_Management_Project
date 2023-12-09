@@ -2,10 +2,12 @@
 Project Summary
 
 o Use this section to describe the project in your own words.
+
 This project is an example of an application that any small business that offers products can utilize to manage their products and sales data.
 There are two main user-types, Admin, and Customer. Each user-type has their own UI portal.
 
 o How did you fulfill each requirement of the specification?
+
 Used JSF template page for navigation bar
 Used JSF composite components for performing CRUD operations on accounts and products.
 Used different application layers to perform different functionalities like fetching data from service-layer, providing it to controller, and displaying it to view xhtml file.
